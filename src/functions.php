@@ -48,7 +48,7 @@ if (!function_exists('aes_encrypt')) {
      * @param string $method
      * @return false|string
      */
-    function aes_encrypt(string $data, string $key, string $iv, string $method = 'AES-256-CBC') {
+    function aes_encrypt(string $data, string $key, string $iv = '', string $method = 'AES-256-CBC') {
         return base64_encode_safe(openssl_encrypt($data, $method, $key, OPENSSL_RAW_DATA, $iv));
     }
 }
@@ -63,7 +63,7 @@ if (!function_exists('aes_decrypt')) {
      * @param string $method
      * @return false|string
      */
-    function aes_decrypt(string $data, string $key, string $iv, string $method = 'AES-256-CBC') {
+    function aes_decrypt(string $data, string $key, string $iv = '', string $method = 'AES-256-CBC') {
         return openssl_decrypt(base64_decode_safe($data), $method, $key, OPENSSL_RAW_DATA, $iv);
     }
 }
@@ -95,7 +95,7 @@ if (!function_exists('array_at')) {
     }
 }
 
-if (function_exists('str_has_prefix')) {
+if (!function_exists('str_has_prefix')) {
     /**
      * Returns true when needle is prefix of haystack, false otherwise
      *
@@ -108,7 +108,7 @@ if (function_exists('str_has_prefix')) {
     }
 }
 
-if (function_exists('str_has_suffix')) {
+if (!function_exists('str_has_suffix')) {
     /**
      * Returns true when needle is suffix of haystack, false otherwise
      *
@@ -121,7 +121,7 @@ if (function_exists('str_has_suffix')) {
     }
 }
 
-if (function_exists('str_contains')) {
+if (!function_exists('str_contains')) {
     /**
      * Returns true when haystack contains needle, false otherwise
      *
