@@ -95,6 +95,48 @@ if (!function_exists('array_at')) {
     }
 }
 
+if (!function_exists('array_any')) {
+    /**
+     * Returns true if any item in an iterable are true, otherwise it returns false
+     *
+     * @param array $object
+     * @param null $handler
+     * @return bool
+     */
+    function array_any(array $object, $handler = null): bool {
+        if (!$handler || !is_callable($handler)) {
+            $handler = 'boolval';
+        }
+
+        foreach ($object as $value) {
+            if (call_user_func($handler, $value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+if (!function_exists('array_every')) {
+    /**
+     * @param array $object
+     * @param null $handler
+     * @return bool
+     */
+    function array_every(array $object, $handler = null): bool {
+        if (!$handler || !is_callable($handler)) {
+            $handler = 'boolval';
+        }
+
+        foreach ($object as $value) {
+            if (!call_user_func($handler, $value)) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
 if (!function_exists('str_has_prefix')) {
     /**
      * Returns true when needle is prefix of haystack, false otherwise

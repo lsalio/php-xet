@@ -12,9 +12,12 @@ namespace Xet\Tests;
 
 use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use function Xet\aes_decrypt;
 use function Xet\aes_encrypt;
+use function Xet\array_any;
 use function Xet\array_at;
+use function Xet\array_every;
 use function Xet\base64_decode_safe;
 use function Xet\base64_encode_safe;
 use function Xet\str_contains;
@@ -95,6 +98,30 @@ class FunctionsTest extends TestCase {
         $this->assertEquals(true, str_contains($this->plain_text, 'text中文🔥'));
         $this->assertEquals(true, str_contains($this->plain_text, '🔥'));
         $this->assertEquals(true, str_contains($this->plain_text, "\xff"));
+    }
+
+    public function testArrayAny() {
+        $this->assertEquals(true, array_any([true, false]));
+        $this->assertEquals(true, array_any([1, 0]));
+        $this->assertEquals(true, array_any([-1, 0]));
+        $this->assertEquals(false, array_any([0, false, [], '']));
+    }
+
+    public function testArrayAnyCustomHandler() {
+        $this->assertEquals(true, array_any([false, 0, [], ''], function($value) {
+            return $value === 0;
+        }));
+    }
+
+    public function testArrayEvery() {
+        $this->assertEquals(true, array_every([true, new stdClass(), 1, -1, [[]]]));
+        $this->assertEquals(false, array_every([true, new stdClass(), '', -1, [[]]]));
+    }
+
+    public function testArrayEveryCustomHandler() {
+        $this->assertEquals(true, array_any([false, 0, [], ''], function($value) {
+            return !boolval($value);
+        }));
     }
 
 }
