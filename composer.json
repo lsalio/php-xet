@@ -3,9 +3,10 @@
     "description": "Utility methods for php",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/wjiec/php-xet",
     "authors": [
         {
-            "name": "Jayson",
+            "name": "Jayson Wang",
             "email": "jayson@laboys.org"
         }
     ],

@@ -6,7 +6,7 @@
  * @author    Jayson Wang <jayson@laboys.org>
  * @copyright Copyright (C) 2020 Jayson Wang
  * @license   MIT License
- * @link      https://github.com/lsalio/php-xet
+ * @link      https://github.com/wjiec/php-xet
  */
 declare(strict_types=1);
 
